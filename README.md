@@ -33,7 +33,7 @@ This project uses the preprocessed OASIS MRI dataset, which provides 3D brain sc
 | 3        | 0.9661     |
 | **Mean** | **0.9494** |
 
-### Image segmentation and ground-trut
+### Image segmentation and ground-truth
 
 <p align="center">
   <img src="/figures/download.png">
