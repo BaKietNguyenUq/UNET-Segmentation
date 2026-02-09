@@ -82,5 +82,5 @@ def main() -> None:
     model.load_state_dict(torch.load("best_model.pth"))    
     result_model(model, test_loader, device, config_dict["out_channels"])
         
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()

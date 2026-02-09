@@ -1,5 +1,4 @@
 import torch
-import torch.nn.module as nn
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 from modules import Unet
@@ -40,8 +39,8 @@ def test_model(model: Unet, test_loader: DataLoader, device: str, num_classes: i
             all_dice.append(dice_per_class.cpu())
 
     # Stack results and average across test set
-    all_dice = torch.cat(all_dice, dim=0)   
-    mean_per_class = all_dice.mean(dim=0)
+    all_dice = torch.cat(all_dice, dim=1)   
+    mean_per_class = all_dice.mean(dim=1)
 
     print("\n=== Test Set Dice ===")
     for i, d in enumerate(mean_per_class):
