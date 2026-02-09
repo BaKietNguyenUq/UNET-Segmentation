@@ -47,35 +47,12 @@ def get_transforms():
     ])
     return img_transform, mask_transform
 
-def get_datasets(base_dir):
-    train_dir = f"{base_dir}/keras_png_slices_train"
-    train_dir_seg = f"{base_dir}/keras_png_slices_seg_train"
-    test_dir  = f"{base_dir}/keras_png_slices_test"
-    test_dir_seg  = f"{base_dir}/keras_png_slices_seg_test"
-    
+def get_loaders(config : dict) -> tuple[DataLoader, DataLoader, DataLoader]:
     img_transform, mask_transform = get_transforms()
-
-    train_dataset = MRISegmentationDataset(train_dir, train_dir_seg, transform=img_transform, target_transform=mask_transform)
-    test_dataset  = MRISegmentationDataset(test_dir,  test_dir_seg, transform=img_transform, target_transform=mask_transform)
-    
-    return train_dataset, test_dataset
-
-def get_loaders(base_dir, batch_size=32):
-    train_dataset, test_dataset = get_datasets(base_dir)
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-    test_loader  = DataLoader(test_dataset,  batch_size=batch_size, shuffle=False)
-    return train_loader, test_loader
-
-if __name__ == "__main__":
-    base_dir = "/mnt/c/Users/Acer/Downloads/keras_png_slices_data/keras_png_slices_data"
-    batch_size = 32
-    train_loader, test_loader = get_loaders(base_dir, batch_size)
-
-    print("Train samples:", len(train_loader.dataset))
-    print("Test samples:", len(test_loader.dataset))
-    print("Train loader:", len(train_loader))
-    print("Test loader:", len(test_loader))
-    
-    imgs, masks = next(iter(train_loader))
-    print("Image batch:", imgs.shape)   # (B,1,H,W)
-    print("Mask batch:", masks.shape)   # (B,H,W)
+    train_dataset = MRISegmentationDataset(config["train_dir"], config["train_dir_seg"], transform=img_transform, target_transform=mask_transform)
+    val_dataset   = MRISegmentationDataset(config["val_dir"],   config["val_dir_seg"],   transform=img_transform, target_transform=mask_transform)      
+    test_dataset  = MRISegmentationDataset(config["test_dir"],  config["test_dir_seg"], transform=img_transform, target_transform=mask_transform)
+    train_loader = DataLoader(train_dataset, batch_size=config["batch_size"], shuffle=True)
+    val_loader   = DataLoader(val_dataset,   batch_size=config["batch_size"], shuffle=False)
+    test_loader  = DataLoader(test_dataset,  batch_size=config["batch_size"], shuffle=False)
+    return train_loader, val_loader, test_loader
