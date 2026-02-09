@@ -78,14 +78,16 @@ def get_model(in_channels: int, out_channels: int) -> Unet:
 def config() -> dict:
     config = {
         "learning_rate": 1e-3,
-        "batch_size": 32,
-        "num_epochs": 50,
+        "batch_size": 64,
+        "num_epochs": 15,
         "weight_decay": 5e-4,
         "in_channels": 1,
         "out_channels": 4,
-        "train_dir": "",
-        "train_dir_seg": "",
-        "test_dir": "",
-        "test_dir_seg": ""
+        "train_dir": "/content/keras_png_slices_data/keras_png_slices_data/keras_png_slices_train",
+        "train_dir_seg": "/content/keras_png_slices_data/keras_png_slices_data/keras_png_slices_seg_train",
+        "val_dir": "/content/keras_png_slices_data/keras_png_slices_data/keras_png_slices_validate",
+        "val_dir_seg": "/content/keras_png_slices_data/keras_png_slices_data/keras_png_slices_seg_validate",
+        "test_dir": "/content/keras_png_slices_data/keras_png_slices_data/keras_png_slices_test",
+        "test_dir_seg": "/content/keras_png_slices_data/keras_png_slices_data/keras_png_slices_seg_test"
     }
     return config

@@ -64,7 +64,7 @@ def visualize_results(model, test_loader, device):
     mean, std = 0.1317, 0.1864
 
     # Show first 8 samples
-    n = min(8, imgs.size(0))
+    n = min(4, imgs.size(0))
     fig, axes = plt.subplots(n, 3, figsize=(9, 3*n))
 
     for i in range(n):

@@ -66,8 +66,10 @@ def main() -> None:
     
     
     print("Train samples:", len(train_loader.dataset))
+    print("Validation samples:", len(val_loader.dataset))
     print("Test samples:", len(test_loader.dataset))
     print("Train loader:", len(train_loader))
+    print("Validation loader:", len(val_loader))
     print("Test loader:", len(test_loader))
     
     imgs, masks = next(iter(train_loader))
