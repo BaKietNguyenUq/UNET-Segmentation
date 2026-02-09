@@ -82,6 +82,10 @@ def config() -> dict:
         "num_epochs": 50,
         "weight_decay": 5e-4,
         "in_channels": 1,
-        "out_channels": 4
+        "out_channels": 4,
+        "train_dir": "",
+        "train_dir_seg": "",
+        "test_dir": "",
+        "test_dir_seg": ""
     }
     return config
